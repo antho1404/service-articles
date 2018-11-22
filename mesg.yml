@@ -1,0 +1,55 @@
+name: articles
+description: Create and manage articles
+repository: https://github.com/ilgooz/service-articles
+tasks:
+  create:
+    description: Create an article
+    inputs:
+      article:
+        description: An article to create.
+        type: Object
+    outputs:
+      success:
+        data:
+          article:
+            description: An article.
+            type: Object
+      error:
+        data:
+          message:
+            type: String
+  get:
+    description: Create an article
+    inputs:
+      id:
+        description: ID or human readable id of article.
+        type: String
+    outputs:
+      success:
+        data:
+          article:
+            description: Requested Article
+            type: Object
+      error:
+        data:
+          message:
+            type: String
+  list:
+    description: Create an article
+    outputs:
+      success:
+        data:
+          articles:
+            description: List of articles.
+            type: Object
+      error:
+        data:
+          message:
+            type: String
+dependencies:
+  mongo:
+    image: mongo
+    ports:
+      - 50006:27017
+    volumes:
+      - /data/db

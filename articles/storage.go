@@ -68,7 +68,7 @@ func (s *MongoStorage) Get(id string) (*Article, error) {
 	ss := s.ss.Clone()
 	defer ss.Close()
 	var a *Article
-	return a, ss.DB(s.dbName).C(s.articleC).Find(bson.M{"_id": bson.ObjectIdHex("id")}).One(&a)
+	return a, ss.DB(s.dbName).C(s.articleC).Find(bson.M{"_id": bson.ObjectIdHex(id)}).One(&a)
 }
 
 // List returns all articles from storage.

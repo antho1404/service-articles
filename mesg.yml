@@ -64,7 +64,6 @@ tasks:
       success:
         data:
           article:
-            optional: true
             <<: *article
       error:
         <<: *error

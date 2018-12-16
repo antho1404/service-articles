@@ -6,20 +6,56 @@ tasks:
     description: Create an article
     inputs:
       article:
-        description: An article to create.
-        type: Object
+        description: An article to create
+        type:
+          title:
+            description: Title of the article.
+            type: String
+          content:
+            description: Content of the article
+            type: String
+          location:
+            description: Location info of where article is posted from
+            type:
+              city:
+                type: String
+              country:
+                type: String
     outputs:
       success:
         data:
-          article:
+          article: &article
             description: An article.
-            type: Object
-      error:
+            type:
+              id:
+                description: Unique id of article
+                type: String
+              path:
+                description: Human readable & SEO friendly URL path of article
+                type: String
+              title:
+                description: Title of the article.
+                type: String
+              content:
+                description: Content of the article
+                type: String
+              location:
+                description: Location info of where article is posted from
+                type:
+                  city:
+                    type: String
+                  country:
+                    type: String
+              createdAt:
+                type: String
+                description: Creation time of article
+      error: &error
         data:
           message:
             type: String
+  
   get:
-    description: Create an article
+    description: Get article
     inputs:
       id:
         description: ID or human readable id of article.
@@ -28,24 +64,23 @@ tasks:
       success:
         data:
           article:
-            description: Requested Article
-            type: Object
+            optional: true
+            <<: *article
       error:
-        data:
-          message:
-            type: String
+        <<: *error
+  
   list:
-    description: Create an article
+    description: Get a list of articles
     outputs:
       success:
         data:
           articles:
             description: List of articles.
-            type: Object
+            repeated: true
+            <<: *article
       error:
-        data:
-          message:
-            type: String
+        <<: *error
+
 dependencies:
   mongo:
     image: mongo

@@ -75,7 +75,7 @@ func (s *MongoStorage) Get(id string) (*Article, error) {
 func (s *MongoStorage) List() ([]*Article, error) {
 	ss := s.ss.Clone()
 	defer ss.Close()
-	var articles []*Article
+	articles := []*Article{}
 	return articles, ss.DB(s.dbName).C(s.articleC).Find(bson.M{}).All(&articles)
 }
 
